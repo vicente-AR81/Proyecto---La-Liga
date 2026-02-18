@@ -24,16 +24,18 @@ def index():
 
 @app.route("/club/<int:team_id>")
 def club(team_id):
-    url = f"https://api.football-data.org/v4/teams/{team_id}"
 
-    response = requests.get(url, headers=headers)
+    team_url = f"https://api.football-data.org/v4/teams/{team_id}"
+    matches_url = f"https://api.football-data.org/v4/teams/{team_id}/matches?limit=5"
 
-    if response.status_code != 200:
-        return f"Error API: {response.status_code}"
+    team_response = requests.get(team_url, headers=headers)
+    matches_response = requests.get(matches_url, headers=headers)
 
-    team_data = response.json()
+    team = team_response.json()
+    matches = matches_response.json().get("matches", [])
 
-    return render_template("club.html", team=team_data)
+    return render_template("club.html", team=team, matches=matches)
+
 
 
 @app.route('/api/teams')

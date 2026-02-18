@@ -7,18 +7,80 @@
 </head>
 <body>
 
-<a href="{{ url_for('index') }}" class="back">← Volver</a>
+<div class="navbar">
+    <a href="{{ url_for('index') }}">← Volver a LaLiga</a>
+</div>
 
-<div class="club-container">
-    <img src="{{ team.crest }}" class="club-crest">
+<div class="dashboard">
 
-    <h1>{{ team.name }}</h1>
+    <!-- INFO CLUB -->
+    <div class="card info">
+    <div class="info-layout">
 
-    <p><strong>Estadio:</strong> {{ team.venue }}</p>
-    <p><strong>Fundado:</strong> {{ team.founded }}</p>
-    <p><strong>Ciudad:</strong> {{ team.address }}</p>
+        <div class="crest-container">
+            <img src="{{ team.crest }}" alt="Escudo">
+        </div>
 
-    <a href="{{ team.website }}" target="_blank">Sitio oficial</a>
+        <div class="club-data">
+            <h2>{{ team.name }}</h2>
+            <p><strong>Fundado:</strong> {{ team.founded }}</p>
+            <p><strong>Estadio:</strong> {{ team.venue }}</p>
+            <p><strong>Dirección:</strong> {{ team.address }}</p>
+            <p><strong>Colores:</strong> {{ team.clubColors }}</p>
+        </div>
+        </div>
+        </div>
+
+
+    <!-- DT -->
+    <div class="card coach">
+    <h3>Entrenador</h3>
+
+    {% if team.coach %}
+        <p><strong>{{ team.coach.name }}</strong></p>
+        <p>{{ team.coach.nationality }}</p>
+        <p>Contrato hasta {{ team.coach.contract.until }}</p>
+    {% else %}
+        <p>No disponible</p>
+    {% endif %}
+    </div>
+
+
+    <!-- JUGADORES -->
+    <div class="card players">
+    <h3>Plantilla</h3>
+    <div class="scroll">
+        {% for player in team.squad %}
+            <div class="player">
+                <strong>{{ player.name }}</strong>
+                <span>{{ player.position }}</span>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+
+
+    <!-- PARTIDOS -->
+    <div class="card matches">
+    <h3>Últimos partidos</h3>
+
+    {% for match in matches %}
+        <div class="match">
+            <span>{{ match.homeTeam.name }}</span>
+
+            <strong>
+            {% if match.score.fullTime.home is not none %}
+                {{ match.score.fullTime.home }} - {{ match.score.fullTime.away }}
+            {% else %}
+                VS
+            {% endif %}
+            </strong>
+
+            <span>{{ match.awayTeam.name }}</span>
+        </div>
+    {% endfor %}
+    </div>
+
 </div>
 
 </body>
