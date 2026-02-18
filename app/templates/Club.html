@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ team.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/Club.css') }}">
+</head>
+<body>
+
+<a href="{{ url_for('index') }}" class="back">← Volver</a>
+
+<div class="club-container">
+    <img src="{{ team.crest }}" class="club-crest">
+
+    <h1>{{ team.name }}</h1>
+
+    <p><strong>Estadio:</strong> {{ team.venue }}</p>
+    <p><strong>Fundado:</strong> {{ team.founded }}</p>
+    <p><strong>Ciudad:</strong> {{ team.address }}</p>
+
+    <a href="{{ team.website }}" target="_blank">Sitio oficial</a>
+</div>
+
+</body>
+</html>

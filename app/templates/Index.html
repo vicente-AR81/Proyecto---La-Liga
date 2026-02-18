@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>LaLiga Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/Index.css') }}">
+</head>
+<body>
+
+<h1 class="title">LaLiga 25/26</h1>
+
+<div class="grid">
+    {% for team in teams %}
+        <a href="/club/{{ team.id }}" class="card">
+            <div class="card-content">
+                <img src="{{ team.crest }}" alt="{{ team.name }}">
+            </div>
+        </a>
+    {% endfor %}
+</div>
+
+</body>
+</html>
