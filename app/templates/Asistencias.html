@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LaLiga Clasificación</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/Asistencias.css') }}">
+</head>
+<body>
+    
+<h2>Tabla de Asistencias</h2>
+
+<a href="{{ url_for('index') }}">← Volver</a>
+
+<table>
+    <tr>
+        <th>#</th>
+        <th>Jugador</th>
+        <th>Equipo</th>
+        <th>Asistencias</th>
+    </tr>
+
+    {% for p in assists %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ p.player.name }}</td>
+        <td>{{ p.team.name }}</td>
+        <td>{{ p.assists or 0 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+</body>
+</html>

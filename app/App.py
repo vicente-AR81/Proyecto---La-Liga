@@ -36,6 +36,46 @@ def club(team_id):
 
     return render_template("club.html", team=team, matches=matches)
 
+@app.route("/Clasificaciones")
+def Clasificaciones():
+    url = "https://api.football-data.org/v4/competitions/PD/standings"
+    response = requests.get(url, headers=headers)
+    data = response.json()
+
+    table = data["standings"][0]["table"]
+
+    return render_template("Clasificaciones.html", table=table)
+
+
+@app.route("/Tabla-Goleadores")
+def Goleadores():
+    url = "https://api.football-data.org/v4/competitions/PD/scorers"
+    response = requests.get(url, headers=headers)
+    data = response.json()
+
+    scorers = data["scorers"]
+
+    return render_template("Goleadores.html", scorers=scorers)
+
+
+
+@app.route("/Tabla-Asistencias")
+def Asistencias():
+    url = "https://api.football-data.org/v4/competitions/PD/scorers"
+    response = requests.get(url, headers=headers)
+    data = response.json()
+
+    players = data["scorers"]
+
+    # Hace que los jugadores con null asistencias se transforme a 0
+    for p in players:
+        if p["assists"] is None:
+            p["assists"] = 0
+
+    # Ordenar por asistencias (de mayor a menor)
+    players_sorted = sorted(players, key=lambda x: x.get("assists", 0), reverse=True)
+
+    return render_template("Asistencias.html", assists=players_sorted)
 
 
 @app.route('/api/teams')

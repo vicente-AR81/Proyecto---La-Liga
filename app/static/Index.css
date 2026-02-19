@@ -5,6 +5,30 @@ body {
     color: white;
 }
 
+.navbar {
+    background: #111827;
+    color: white;
+    padding: 20px 40px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 3px solid #e11d48;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    color: #e11d48;
+}
+
 .title {
     text-align: center;
     padding: 30px;

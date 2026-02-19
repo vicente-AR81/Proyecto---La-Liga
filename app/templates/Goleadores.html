@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LaLiga Clasificación</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/Goleadores.css') }}">
+</head>
+<body>
+    
+<h2>Tabla de Goleadores</h2>
+
+<a href="{{ url_for('index') }}">← Volver</a>
+
+{% for player in scorers %}
+<div>
+    <strong>{{ player.player.name }}</strong>
+    — {{ player.team.name }}
+    ({{ player.goals }} goles)
+</div>
+{% endfor %}
+
+</body>
+</html>

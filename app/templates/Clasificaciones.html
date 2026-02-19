@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LaLiga Clasificación</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/') }}">
+</head>
+<body>
+    
+<h2>Clasificación LaLiga</h2>
+
+<a href="{{ url_for('index') }}">← Volver</a>
+
+<table>
+<tr>
+    <th>#</th>
+    <th>Equipo</th>
+    <th>Puntos</th>
+    <th>DG</th>
+</tr>
+
+{% for team in table %}
+<tr>
+    <td>{{ team.position }}</td>
+    <td>{{ team.team.name }}</td>
+    <td>{{ team.points }}</td>
+    <td>{{ team.goalDifference }}</td>
+</tr>
+{% endfor %}
+</table>
+
+</body>
+</html>
