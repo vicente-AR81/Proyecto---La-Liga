@@ -44,6 +44,10 @@ def Clasificaciones():
 
     table = data["standings"][0]["table"]
 
+    for team in table:
+        if team["form"] is None:
+            team["form"] = ""
+
     return render_template("Clasificaciones.html", table=table)
 
 
