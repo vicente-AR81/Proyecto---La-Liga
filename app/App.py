@@ -1,6 +1,7 @@
 import os
 import requests
 from flask import Flask, render_template, jsonify
+from Banderas import country_to_code
 
 app = Flask(__name__)
 
@@ -33,6 +34,24 @@ def club(team_id):
 
     team = team_response.json()
     matches = matches_response.json().get("matches", [])
+
+    position_map = {
+        "Goalkeeper": "PO",
+        "Defence": "DFC",
+        "Midfield": "MC",
+        "Offence": "DEL",
+        None: "-"
+    }
+
+    for player in team.get("squad", []):
+        original_position = player.get("position")
+        player["shortPosition"] = position_map.get(original_position, original_position)
+        code = country_to_code(player.get("nationality"))
+        if code:
+            player["flagUrl"] = f"https://flagcdn.com/w40/{code}.png"
+        else:
+            player["flagUrl"] = None
+        
 
     return render_template("club.html", team=team, matches=matches)
 

@@ -74,9 +74,42 @@ body {
     max-height: 320px;
 }
 
-.player {
-    padding: 8px;
-    border-bottom: 1px solid #ccc;
+.players .player {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 6px;
+    border-bottom: 1px solid #2a2f3a;
+    font-size: 14px;
+}
+
+.player-name {
+    font-weight: 500;
+}
+
+.player-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pos {
+    background-color: #1e90ff;
+    color: white;
+    font-weight: bold;
+    font-size: 11px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    min-width: 32px;
+    text-align: center;
+}
+
+.flag {
+    width: 22px;
+    height: 15px;
+    object-fit: cover;
+    border-radius: 2px;
+    border: 1px solid #444;
 }
 
 /* Partidos */
