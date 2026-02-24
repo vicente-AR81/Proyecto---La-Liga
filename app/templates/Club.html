@@ -68,25 +68,33 @@
 
 
     <!-- PARTIDOS -->
-    <div class="card matches">
-    <h3>Últimos partidos</h3>
+   <div class="card matches">
 
-    {% for match in matches %}
-        <div class="match">
-            <span>{{ match.homeTeam.name }}</span>
+    <h3>Partidos</h3>
 
-            <strong>
-            {% if match.score.fullTime.home is not none %}
-                {{ match.score.fullTime.home }} - {{ match.score.fullTime.away }}
-            {% else %}
-                VS
-            {% endif %}
-            </strong>
+    <div class="matches-container">
 
-            <span>{{ match.awayTeam.name }}</span>
-        </div>
-    {% endfor %}
+        <h4 class="matches-title">Últimos partidos</h4>
+        {% for match in past_matches %}
+            <div class="match-row played">
+                <span class="team">{{ match.home }}</span>
+                <span class="center result">{{ match.result }}</span>
+                <span class="team">{{ match.away }}</span>
+            </div>
+        {% endfor %}
+
+        <h4 class="matches-title">Próximos partidos</h4>
+        {% for match in future_matches %}
+            <div class="match-row upcoming">
+                <span class="team">{{ match.home }}</span>
+                <span class="center date">{{ match.date }}</span>
+                <span class="team">{{ match.away }}</span>
+            </div>
+        {% endfor %}
+
     </div>
+
+</div>
 
 </div>
 

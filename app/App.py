@@ -2,6 +2,7 @@ import os
 import requests
 from flask import Flask, render_template, jsonify
 from Banderas import country_to_code
+from Partidos import format_match
 
 app = Flask(__name__)
 
@@ -27,14 +28,18 @@ def index():
 def club(team_id):
 
     team_url = f"https://api.football-data.org/v4/teams/{team_id}"
-    matches_url = f"https://api.football-data.org/v4/teams/{team_id}/matches?limit=5"
+    past_matches_url = f"https://api.football-data.org/v4/teams/{team_id}/matches?status=FINISHED&limit=50"
+    future_matches_url = f"https://api.football-data.org/v4/teams/{team_id}/matches?status=SCHEDULED&limit=20"
 
     team_response = requests.get(team_url, headers=headers)
-    matches_response = requests.get(matches_url, headers=headers)
+    past_matches_response = requests.get(past_matches_url, headers=headers)
+    future_matches_response = requests.get(future_matches_url, headers=headers)
 
     team = team_response.json()
-    matches = matches_response.json().get("matches", [])
+    past_matches = past_matches_response.json().get("matches", [])
+    future_matches = future_matches_response.json().get("matches", [])
 
+    
     position_map = {
         "Goalkeeper": "PO",
         "Defence": "DFC",
@@ -51,9 +56,11 @@ def club(team_id):
             player["flagUrl"] = f"https://flagcdn.com/w40/{code}.png"
         else:
             player["flagUrl"] = None
-        
+    
+    past_matches = [format_match(m) for m in past_matches]
+    future_matches = [format_match(m) for m in future_matches]
 
-    return render_template("club.html", team=team, matches=matches)
+    return render_template("club.html", team=team, past_matches=past_matches, future_matches=future_matches)
 
 @app.route("/Clasificaciones")
 def Clasificaciones():
