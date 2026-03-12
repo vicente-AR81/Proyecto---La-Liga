@@ -51,17 +51,18 @@
     <h3>Plantilla</h3>
     <div class="scroll">
         {% for player in team.squad %}
-            <div class="player">
+            <a href="{{ url_for('player', player_id=player.id) }}" class="player">
                 <div class="player-name">
                     {{ player.name }}
                 </div>
+                <div>{{ player.shirtNumber }}</div>
                 <div class="player-meta">
                     <span class="pos">{{ player.shortPosition }}</span>
                     {% if player.flagUrl %}
                         <img src="{{ player.flagUrl }}" class="flag">
                     {% endif %}
                 </div>
-            </div>
+            </a>
         {% endfor %}
     </div>
     </div>

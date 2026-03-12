@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{{ player.name }}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='Jugador.css') }}">
+</head>
+
+<body>
+
+<div class="navbar">
+<a href="javascript:history.back()">← Volver</a>
+</div>
+
+<div class="player-dashboard">
+
+    <!-- CARTA JUGADOR -->
+    <div class="player-card">
+
+        <h2>{{ player.name }}</h2>
+
+        {% if player.flagUrl %}
+        <img src="{{ player.flagUrl }}" class="flag-large">
+        {% endif %}
+
+        <p><strong>Posición:</strong> {{ player.position }}</p>
+        <p><strong>Nacionalidad:</strong> {{ player.nationality }}</p>
+        <p><strong>Fecha de nacimiento:</strong> {{ player.dateOfBirth }}</p>
+        <p><strong>Dorsal:</strong> {{ player.shirtNumber or "N/A" }}</p>
+        <p><strong>Club actual:</strong>  <img src="{{ player.currentTeam.crest }}" alt="Escudo"> </p>
+
+    </div>
+
+    <!-- HISTORIAL -->
+    <div class="player-history">
+
+        <h3>Clubes</h3>
+
+        <ul>
+            <li>Barcelona</li>
+            <li>Las Palmas</li>
+            <li>Barcelona B</li>
+        </ul>
+
+        <h3>Títulos</h3>
+
+        <ul>
+            <li>La Liga 2023</li>
+            <li>Supercopa de España 2024</li>
+        </ul>
+
+    </div>
+
+</div>
+
+</body>
+</html>

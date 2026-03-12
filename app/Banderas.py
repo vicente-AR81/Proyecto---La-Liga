@@ -1,4 +1,4 @@
-#Codigo modularizado en este archivo
+# Codigo modularizado en este archivo
 # Este archivo contiene la función para convertir el nombre de un país a bandera usando https://flagcdn.com/w40/{code}.png 
 
 mapping = {

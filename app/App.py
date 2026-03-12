@@ -42,9 +42,20 @@ def club(team_id):
     
     position_map = {
         "Goalkeeper": "PO",
-        "Defence": "DFC",
+        "Defence": "CB",
         "Midfield": "MC",
-        "Offence": "DEL",
+        "Offence": "DC",
+        "Right Midfield": "MD",
+        "Left Midfield": "MI",
+        "Right Winger": "ED",
+        "Left Winger": "EI",
+        "Centre-Back": "CB",
+        "Centre-Forward": "DC",
+        "Right-Back": "LD",
+        "Left-Back": "LI",
+        "Defensive Midfield": "MCD",
+        "Attacking Midfield": "MCO",
+        "Central Midfield": "MC",
         None: "-"
     }
 
@@ -107,6 +118,19 @@ def Asistencias():
 
     return render_template("Asistencias.html", assists=players_sorted)
 
+@app.route("/player/<int:player_id>")
+def player(player_id):
+
+    player_url = f"https://api.football-data.org/v4/persons/{player_id}"
+
+    response = requests.get(player_url, headers=headers)
+    player = response.json()
+
+    code = country_to_code(player.get("nationality"))
+    if code:
+        player["flagUrl"] = f"https://flagcdn.com/w40/{code}.png"
+
+    return render_template("Jugador.html", player=player)
 
 @app.route('/api/teams')
 def get_teams():
